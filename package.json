@@ -14,7 +14,7 @@
   "license": "CC0-1.0",
   "homepage": "https://github.com/heidgera/photoBoard#readme",
   "dependencies": {
-    "src/muse": "heidgera/Muse"
+    "git://github.com/user/project.git"
   },
   "devDependencies": {
     "electron-prebuilt": "^0.35.0"
