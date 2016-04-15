@@ -1,5 +1,5 @@
 {
-  "name": "SMM PhotoBoard",
+  "name": "PhotoBoard",
   "version": "1.0.0",
   "description": "A minimal photo board",
   "main": "main.js",
@@ -10,12 +10,12 @@
     "type": "git",
     "url": "git+https://github.com/heidgera/photoBoard.git"
   },
-  "keywords": [
-    "pictures",
-  ],
   "author": "ajhg",
   "license": "CC0-1.0",
   "homepage": "https://github.com/heidgera/photoBoard#readme",
+  "dependencies": {
+    "src/muse": "heidgera/Muse"
+  },
   "devDependencies": {
     "electron-prebuilt": "^0.35.0"
   }

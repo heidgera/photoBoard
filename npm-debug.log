@@ -1,0 +1,98 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/opt/boxen/nodenv/versions/v0.10/bin/node',
+1 verbose cli   '/opt/boxen/nodenv/versions/v0.10/bin/npm',
+1 verbose cli   'i' ]
+2 info using npm@1.4.23
+3 info using node@v0.10.31
+4 verbose node symlink /opt/boxen/nodenv/versions/v0.10/bin/node
+5 verbose readDependencies using package.json deps
+6 verbose install where, deps [ '/Users/aheidgerken/Documents/electronApps/photoBoard',
+6 verbose install   [ 'src/muse', 'electron-prebuilt' ] ]
+7 info preinstall PhotoBoard@1.0.0
+8 verbose readDependencies using package.json deps
+9 verbose cache add [ 'src/muse@git+https://github.com/heidgera/Muse', null ]
+10 verbose cache add name=undefined spec="src/muse@git+https://github.com/heidgera/Muse" args=["src/muse@git+https://github.com/heidgera/Muse",null]
+11 verbose parsed url { protocol: null,
+11 verbose parsed url   slashes: null,
+11 verbose parsed url   auth: null,
+11 verbose parsed url   host: null,
+11 verbose parsed url   port: null,
+11 verbose parsed url   hostname: null,
+11 verbose parsed url   hash: null,
+11 verbose parsed url   search: null,
+11 verbose parsed url   query: null,
+11 verbose parsed url   pathname: 'src/muse@git+https://github.com/heidgera/Muse',
+11 verbose parsed url   path: 'src/muse@git+https://github.com/heidgera/Muse',
+11 verbose parsed url   href: 'src/muse@git+https://github.com/heidgera/Muse' }
+12 verbose already installed skipping electron-prebuilt@^0.35.0 /Users/aheidgerken/Documents/electronApps/photoBoard
+13 verbose cache add name="src/muse" spec="git+https://github.com/heidgera/Muse" args=["src/muse","git+https://github.com/heidgera/Muse"]
+14 verbose parsed url { protocol: 'git+https:',
+14 verbose parsed url   slashes: true,
+14 verbose parsed url   auth: null,
+14 verbose parsed url   host: 'github.com',
+14 verbose parsed url   port: null,
+14 verbose parsed url   hostname: 'github.com',
+14 verbose parsed url   hash: null,
+14 verbose parsed url   search: null,
+14 verbose parsed url   query: null,
+14 verbose parsed url   pathname: '/heidgera/Muse',
+14 verbose parsed url   path: '/heidgera/Muse',
+14 verbose parsed url   href: 'git+https://github.com/heidgera/Muse' }
+15 silly lockFile c09dfaf5-https-github-com-heidgera-Muse https://github.com/heidgera/Muse
+16 verbose lock https://github.com/heidgera/Muse /Users/aheidgerken/.npm/c09dfaf5-https-github-com-heidgera-Muse.lock
+17 verbose addRemoteGit [ 'https://github.com/heidgera/Muse', 'master' ]
+18 verbose git clone https://github.com/heidgera/Muse Cloning into bare repository '/Users/aheidgerken/.npm/_git-remotes/https-github-com-heidgera-Muse-c09dfaf5'...
+19 verbose git fetch -a origin (https://github.com/heidgera/Muse)
+20 verbose git rev-list -n1 master 324ba0ea9b3897ceb869d8bfbc2893bf042ca696
+21 verbose resolved git url git+https://github.com/heidgera/Muse#324ba0ea9b3897ceb869d8bfbc2893bf042ca696
+22 verbose tar unpack /var/folders/dv/tfv7k2d16zn5jppj93520yl1qg9vcy/T/npm-39913-1hk01C5f/1460747857851-0.6388771727215499/tmp.tgz
+23 silly lockFile 3b282eef--6388771727215499-tmp-tgz-unpack tar:///var/folders/dv/tfv7k2d16zn5jppj93520yl1qg9vcy/T/npm-39913-1hk01C5f/1460747857851-0.6388771727215499/tmp.tgz-unpack
+24 verbose lock tar:///var/folders/dv/tfv7k2d16zn5jppj93520yl1qg9vcy/T/npm-39913-1hk01C5f/1460747857851-0.6388771727215499/tmp.tgz-unpack /Users/aheidgerken/.npm/3b282eef--6388771727215499-tmp-tgz-unpack.lock
+25 silly lockFile abeedd30-57851-0-6388771727215499-tmp-tgz tar:///var/folders/dv/tfv7k2d16zn5jppj93520yl1qg9vcy/T/npm-39913-1hk01C5f/1460747857851-0.6388771727215499/tmp.tgz
+26 verbose lock tar:///var/folders/dv/tfv7k2d16zn5jppj93520yl1qg9vcy/T/npm-39913-1hk01C5f/1460747857851-0.6388771727215499/tmp.tgz /Users/aheidgerken/.npm/abeedd30-57851-0-6388771727215499-tmp-tgz.lock
+27 silly gunzTarPerm modes [ '755', '644' ]
+28 silly gunzTarPerm extractEntry
+29 silly gunzTarPerm modified mode [ '', 509, 493 ]
+30 silly gunzTarPerm extractEntry audio.js
+31 silly gunzTarPerm modified mode [ 'audio.js', 436, 420 ]
+32 silly gunzTarPerm extractEntry canvas.js
+33 silly gunzTarPerm modified mode [ 'canvas.js', 436, 420 ]
+34 silly gunzTarPerm extractEntry config.js
+35 silly gunzTarPerm modified mode [ 'config.js', 436, 420 ]
+36 silly gunzTarPerm extractEntry graph.js
+37 silly gunzTarPerm modified mode [ 'graph.js', 436, 420 ]
+38 silly gunzTarPerm extractEntry hardware.js
+39 silly gunzTarPerm modified mode [ 'hardware.js', 436, 420 ]
+40 silly gunzTarPerm extractEntry hardwareApp.js
+41 silly gunzTarPerm modified mode [ 'hardwareApp.js', 436, 420 ]
+42 silly gunzTarPerm extractEntry include.js
+43 silly gunzTarPerm modified mode [ 'include.js', 436, 420 ]
+44 silly gunzTarPerm extractEntry pointStack.js
+45 silly gunzTarPerm modified mode [ 'pointStack.js', 436, 420 ]
+46 silly gunzTarPerm extractEntry serialApp.js
+47 silly gunzTarPerm modified mode [ 'serialApp.js', 436, 420 ]
+48 silly gunzTarPerm extractEntry utils.js
+49 silly gunzTarPerm modified mode [ 'utils.js', 436, 420 ]
+50 silly gunzTarPerm extractEntry webcam.js
+51 silly gunzTarPerm modified mode [ 'webcam.js', 436, 420 ]
+52 silly gunzTarPerm extractEntry websocket.js
+53 silly gunzTarPerm modified mode [ 'websocket.js', 436, 420 ]
+54 silly lockFile 3b282eef--6388771727215499-tmp-tgz-unpack tar:///var/folders/dv/tfv7k2d16zn5jppj93520yl1qg9vcy/T/npm-39913-1hk01C5f/1460747857851-0.6388771727215499/tmp.tgz-unpack
+55 silly lockFile 3b282eef--6388771727215499-tmp-tgz-unpack tar:///var/folders/dv/tfv7k2d16zn5jppj93520yl1qg9vcy/T/npm-39913-1hk01C5f/1460747857851-0.6388771727215499/tmp.tgz-unpack
+56 silly lockFile abeedd30-57851-0-6388771727215499-tmp-tgz tar:///var/folders/dv/tfv7k2d16zn5jppj93520yl1qg9vcy/T/npm-39913-1hk01C5f/1460747857851-0.6388771727215499/tmp.tgz
+57 silly lockFile abeedd30-57851-0-6388771727215499-tmp-tgz tar:///var/folders/dv/tfv7k2d16zn5jppj93520yl1qg9vcy/T/npm-39913-1hk01C5f/1460747857851-0.6388771727215499/tmp.tgz
+58 silly lockFile c09dfaf5-https-github-com-heidgera-Muse https://github.com/heidgera/Muse
+59 silly lockFile c09dfaf5-https-github-com-heidgera-Muse https://github.com/heidgera/Muse
+60 error Error: ENOENT, open '/var/folders/dv/tfv7k2d16zn5jppj93520yl1qg9vcy/T/npm-39913-1hk01C5f/1460747857851-0.6388771727215499/tmp.tgz-unpack/package.json'
+61 error If you need help, you may report this *entire* log,
+61 error including the npm and node versions, at:
+61 error     <http://github.com/npm/npm/issues>
+62 error System Darwin 14.4.0
+63 error command "/opt/boxen/nodenv/versions/v0.10/bin/node" "/opt/boxen/nodenv/versions/v0.10/bin/npm" "i"
+64 error cwd /Users/aheidgerken/Documents/electronApps/photoBoard
+65 error node -v v0.10.31
+66 error npm -v 1.4.23
+67 error path /var/folders/dv/tfv7k2d16zn5jppj93520yl1qg9vcy/T/npm-39913-1hk01C5f/1460747857851-0.6388771727215499/tmp.tgz-unpack/package.json
+68 error code ENOENT
+69 error errno 34
+70 verbose exit [ 34, true ]
