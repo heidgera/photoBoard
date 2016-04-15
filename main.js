@@ -35,6 +35,8 @@ app.on('ready', function() {
     height: size.height,
   });
 
+  mainWindow.setMenu(null);
+
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 
