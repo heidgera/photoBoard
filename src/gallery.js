@@ -69,6 +69,7 @@ var gallery = inheritFrom(HTMLElement, function() {
       } else {
         clearTimeout(_this.advanceTimer);
         _this.advanceTimer = setTimeout(_this.displayNext, 5000);
+        _this.className = 'show';
       }
     };
 
