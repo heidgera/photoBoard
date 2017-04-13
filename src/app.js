@@ -8,6 +8,7 @@ var gmail = google.gmail;
 var sheets = google.sheets;
 
 var ssID = '1OE0X2Ey1nJaAAkHnJ02zntw1_uJjYR8k5EmUxZg4VI8';
+var processing = false;
 
 google.onAuth = function() {
   setInterval(function() {
@@ -15,7 +16,8 @@ google.onAuth = function() {
       var msgs = response.messages;
       if (response.resultSizeEstimate == 0 || msgs.length == 0) {
         //console.log('No messages found.');
-      } else {
+      } else if (!processing) {
+        processing = true;
         msgs.forEach(function(msg, ind, arr) {
           let msgId = msg.id;
           let from = '';
@@ -51,6 +53,8 @@ google.onAuth = function() {
                           gmail.editLabels(msgId, [], ['UNREAD']);
                           µ('#main').clear();
                           µ('#main').addFromArray(rows);
+
+                          processing = false;
 
                           //µ('#main').src = file;
                         });
