@@ -2,6 +2,8 @@ var sharp = require('sharp');
 
 require('./src/gallery.js');
 
+var srv = require('./src/exp_server.js');
+
 const remote = require('electron').remote;
 
 var google = require('./src/google.js');
@@ -24,7 +26,7 @@ function getIPaddress() {
       var address = interfaces[k][k2];
       if (address.family === 'IPv4' && !address.internal) {
         //addresses.push(address.address);
-        addresses += address.address + '; ';
+        addresses += address.address + '/';
       }
     }
   }
@@ -122,6 +124,23 @@ google.onAuth = function() {
         break;
     }
   };
+
+  srv.app.post('/control.json', (req, res)=> {
+    var ret = { rep:true };
+
+    console.log(req);
+
+    var obj = req.body;
+    if (obj.next) µ('#main').displayNext(true);
+    else if (obj.prev) µ('#main').displayPrevious(true);
+    else if (obj.menu) {
+      if (µ('#main').className == 'select') {
+        µ('#main').className = 'show';
+      } else µ('#main').className = 'select';
+    }
+
+    res.json(ret);
+  });
 
   µ('#main').displayNext();
 
