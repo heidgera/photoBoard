@@ -61,6 +61,7 @@ google.onAuth = function() {
               var desc = '';
               parts.forEach(function(part, ind, arr) {
                 if (ind == 0) {
+                  console.log(part);
                   desc = (new Buffer(part.parts[0].body.data, 'base64')).toString();
                   desc = desc.replace(/(\r\n|\n|\r)/gm, ' ');
                   console.log(desc);
