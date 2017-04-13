@@ -15,6 +15,7 @@
   "homepage": "https://github.com/heidgera/photoBoard#readme",
   "devDependencies": {
     "electron": "^1.4.5",
+    "express": "^4.15.2",
     "google-auth-library": "^0.10.0",
     "googleapis": "^18.0.0",
     "nodemailer": "^4.0.0",

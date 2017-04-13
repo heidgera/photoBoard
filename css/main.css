@@ -127,7 +127,7 @@ gal-lery.show > .thumbs {
 }
 
 #ip {
-  display: none;
+  display: block;
   position: fixed;
   right: 0;
   bottom: 0;
