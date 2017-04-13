@@ -2,6 +2,8 @@ var sharp = require('sharp');
 
 require('./src/gallery.js');
 
+const remote = require('electron').remote;
+
 var google = require('./src/google.js');
 var drive = google.drive;
 var gmail = google.gmail;
@@ -9,6 +11,29 @@ var sheets = google.sheets;
 
 var ssID = '1OE0X2Ey1nJaAAkHnJ02zntw1_uJjYR8k5EmUxZg4VI8';
 var processing = false;
+
+function getIPaddress() {
+  var os = require('os');
+
+  var addresses = '';
+
+  var interfaces = os.networkInterfaces();
+  var addresses = [];
+  for (var k in interfaces) {
+    for (var k2 in interfaces[k]) {
+      var address = interfaces[k][k2];
+      if (address.family === 'IPv4' && !address.internal) {
+        //addresses.push(address.address);
+        addresses += address.address + '; ';
+      }
+    }
+  }
+
+  //cur = newPrompt(addresses);
+  return addresses;
+}
+
+µ('#ip').textContent = getIPaddress();
 
 google.onAuth = function() {
   setInterval(function() {
@@ -77,6 +102,9 @@ google.onAuth = function() {
 
   document.onkeydown = function(e) {
     switch (e.which) {
+      case 27:
+        remote.app.quit();
+        break;
       case 37:
         console.log('prev');
         µ('#main').displayPrevious(true);

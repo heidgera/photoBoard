@@ -4,6 +4,7 @@ body {
   font-family: sans-serif;
   color: #aaa;/*color: #080;*/
   font-size: .5px;
+  cursor: none;
 }
 
 ::-webkit-scrollbar {
@@ -68,6 +69,7 @@ gal-lery.show > .display {
 .thumbs {
   line-height: 33vh;
   vertical-align: middle;
+  overflow-y: scroll;
 }
 
 .thumbs > img {
@@ -122,4 +124,17 @@ gal-lery.select > .thumbs {
 
 gal-lery.show > .thumbs {
   animation: fadeOut 1s forwards;
+}
+
+#ip {
+  display: none;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  font-size: 12px;
+  color: #777;
+}
+
+gal-lery.select + #ip {
+  display: block;
 }

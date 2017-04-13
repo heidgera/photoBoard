@@ -20,10 +20,11 @@ function createWindow() {
 
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    fullscreen:true,
+    //fullscreen:true,
     width:size.width,
     height:size.height,
-    kiosk: true,
+
+    //kiosk: true,
     scrollBounce: false,
     title: 'PhotoBoard',
   });
@@ -40,7 +41,7 @@ function createWindow() {
   }));
 
   // Open the DevTools.
-  //mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
