@@ -95,6 +95,8 @@ google.onAuth = function() {
     }
   };
 
+  µ('#main').displayNext();
+
   /*photoRoute.post('/pictures.json', function(req, res) {
     var obj = req.body;
     var ret = {};
