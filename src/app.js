@@ -101,7 +101,7 @@ google.onAuth = function() {
                 if (walkPart(part, 'text/plain') && !desc.length) {
                   desc = (new Buffer(walkPart(part, 'text/plain').body.data, 'base64')).toString();
                   desc = desc.replace(/(\r\n|\n|\r)/gm, ' ');
-                } else if (walkPart(part, 'text/html') && !desc.length) {
+                } else if (walkPart(part, 'text/html') && !descHTML.length) {
                   descHTML = (new Buffer(walkPart(part, 'text/html').body.data, 'base64')).toString();
                 } else if (walkPart(part, 'image/jpeg')) {
                   attachPart = walkPart(part, 'image/jpeg');
