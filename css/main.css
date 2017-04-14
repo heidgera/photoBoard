@@ -40,12 +40,15 @@ gal-lery > div{
 
 gal-lery.show > .display {
   display: block;
+  vertical-align: middle;
 }
 
 .display > img {
+  display: inline-block;
   image-orientation: from-image;
-  height: 100vh;
+  max-height: 100vh;
   width:auto;
+  line-height: 100vh;
 }
 
 .display > .desc {

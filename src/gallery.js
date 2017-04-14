@@ -50,7 +50,7 @@ var gallery = inheritFrom(HTMLElement, function() {
       if (_this.selected) _this.selected.className = '';
       _this.selected = el;
       _this.frame.src = el.src;
-      _this.desc.textContent = el.desc;
+      _this.desc.innerHTML = el.desc;
 
       var box = el.getBoundingClientRect();
 
@@ -70,7 +70,7 @@ var gallery = inheritFrom(HTMLElement, function() {
         _this.advanceTimer = setTimeout(_this.displayNext, 30000);
       } else {
         clearTimeout(_this.advanceTimer);
-        _this.advanceTimer = setTimeout(_this.displayNext, 5000);
+        _this.advanceTimer = setTimeout(_this.displayNext, 7000);
         _this.className = 'show';
       }
     };

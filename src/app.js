@@ -55,6 +55,24 @@ function walkPart(part, type) {
 }
 
 google.onAuth = function() {
+  function storeToSheets(filename, desc, from, cb) {
+    sheets.getData(ssID, 'Sheet1!A2:E', function(resp) {
+      //console.log(resp.values);
+      var rows = resp.values;
+      rows.unshift(new Array());
+      rows[0][0] = filename;
+      rows[0][1] = desc;
+      rows[0][2] = from;
+      sheets.putData(ssID, 'Sheet1!A2:E', rows, function() {
+        if (cb) cb();
+
+        µ('#main').clear();
+        µ('#main').addFromArray(rows);
+
+      });
+    });
+  }
+
   setInterval(function() {
     gmail.listMessages(['UNREAD'], 'subject:#shoppics has:attachment', function(response) {
       var msgs = response.messages;
@@ -87,34 +105,37 @@ google.onAuth = function() {
                   descHTML = (new Buffer(walkPart(part, 'text/html').body.data, 'base64')).toString();
                 } else if (walkPart(part, 'image/jpeg')) {
                   attachPart = walkPart(part, 'image/jpeg');
+                } else if (walkPart(part, 'image/gif')) {
+                  attachPart = walkPart(part, 'image/gif');
                 }
               });
 
               if (attachPart) {
                 //console.log(desc);
                 if (!descHTML.length) descHTML = desc;
+                console.log(descHTML);
                 gmail.getAttachment(msgId, attachPart.body.attachmentId, function(resp) {
                   var data = new Buffer(resp.data, 'base64');
                   var file = 'assets/photos/' + attachPart.filename;
-                  sharp(data).resize(1920, 1080).max().rotate().toFile(file).then(function() {
-                    sheets.getData(ssID, 'Sheet1!A2:E', function(resp) {
-                      //console.log(resp.values);
-                      var rows = resp.values;
-                      rows.unshift(new Array());
-                      rows[0][0] = file;
-                      rows[0][1] = descHTML;
-                      rows[0][2] = from;
-                      sheets.putData(ssID, 'Sheet1!A2:E', rows, function() {
+                  if (attachPart.mimeType == 'image/jpeg' || attachPart.mimeType == 'image/png') {
+                    console.log('store regular image');
+                    sharp(data).resize(1920, 1080).max().rotate().toFile(file).then(function() {
+                      storeToSheets(file, desc, from, ()=> {
                         gmail.editLabels(msgId, [], ['UNREAD']);
-                        µ('#main').clear();
-                        µ('#main').addFromArray(rows);
-
                         processing = false;
-
-                        //µ('#main').src = file;
                       });
                     });
-                  });
+                  } else if (attachPart.mimeType == 'image/gif') {
+                    console.log('store gif');
+                    fs.writeFile(file, data, function(err) {
+                      console.log('done storing data');
+                      if (err) console.log(err);
+                      storeToSheets(file, desc, from, ()=> {
+                        gmail.editLabels(msgId, [], ['UNREAD']);
+                        processing = false;
+                      });
+                    });
+                  }
                 });
               }
               /*if (ind == 0) {
