@@ -1,6 +1,7 @@
 var sharp = require('sharp');
 
 require('./src/gallery.js');
+var fs = require('fs');
 
 var srv = require('./src/exp_server.js');
 
@@ -75,19 +76,23 @@ google.onAuth = function() {
             if (resp.payload.parts) {
               var parts = resp.payload.parts;
               var desc = '';
+              var descHTML = '';
               var attachBody = '';
               console.log(parts);
               parts.forEach(function(part, ind, arr) {
                 if (walkPart(part, 'text/plain') && !desc.length) {
                   desc = (new Buffer(walkPart(part, 'text/plain').body.data, 'base64')).toString();
                   desc = desc.replace(/(\r\n|\n|\r)/gm, ' ');
+                } else if (walkPart(part, 'text/html') && !desc.length) {
+                  descHTML = (new Buffer(walkPart(part, 'text/html').body.data, 'base64')).toString();
                 } else if (walkPart(part, 'image/jpeg')) {
                   attachPart = walkPart(part, 'image/jpeg');
                 }
               });
 
               if (attachPart) {
-                console.log(desc);
+                //console.log(desc);
+                if (!descHTML.length) descHTML = desc;
                 gmail.getAttachment(msgId, attachPart.body.attachmentId, function(resp) {
                   var data = new Buffer(resp.data, 'base64');
                   var file = 'assets/photos/' + attachPart.filename;
@@ -97,7 +102,7 @@ google.onAuth = function() {
                       var rows = resp.values;
                       rows.unshift(new Array());
                       rows[0][0] = file;
-                      rows[0][1] = desc;
+                      rows[0][1] = descHTML;
                       rows[0][2] = from;
                       sheets.putData(ssID, 'Sheet1!A2:E', rows, function() {
                         gmail.editLabels(msgId, [], ['UNREAD']);
@@ -191,6 +196,45 @@ google.onAuth = function() {
         µ('#main').className = 'show';
       } else µ('#main').className = 'select';
     }
+
+    res.json(ret);
+  });
+
+  srv.app.post('/fileUpload', (req, res)=> {
+    var ret = { rep:true };
+
+    req.pipe(req.busboy);
+    req.busboy.on('file', function(fieldname, file, filename) {
+
+      fstream = fs.createWriteStream('assets/photos/' + filename);
+      fstream.on('close', function() {
+        sheets.getData(ssID, 'Sheet1!A2:E', function(resp) {
+          //console.log(resp.values);
+          var rows = resp.values;
+          rows.unshift(new Array());
+          rows[0][0] = 'assets/photos/' + filename;
+          rows[0][1] = '';
+          rows[0][2] = 'Uploaded';
+          sheets.putData(ssID, 'Sheet1!A2:E', rows, function() {
+            µ('#main').clear();
+            µ('#main').addFromArray(rows);
+
+            processing = false;
+
+            //µ('#main').src = file;
+          });
+        });
+      });
+
+      var handleStream = sharp().resize(1920, 1080).max().rotate();
+
+      file.pipe(handleStream).pipe(fstream);
+    });
+
+    /*fs.readFile(req.files.imageUpload.path, function(err, data) {
+      var file = 'assets/photos/' + req.files.imageUpload.name;
+
+    });*/
 
     res.json(ret);
   });

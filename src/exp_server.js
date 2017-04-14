@@ -9,6 +9,7 @@ var express = require('express');
 var port = 80;
 
 var bodyParser = require('body-parser');
+var busboy = require('connect-busboy');
 
 var dirname = __dirname + '/../public';
 
@@ -17,6 +18,7 @@ console.log(dirname + ' is the folder');
 var app = express();
 
 app.use(bodyParser.json());
+app.use(busboy());
 app.use(express.static(dirname));
 
 exports.app = app;
