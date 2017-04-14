@@ -46,7 +46,7 @@ gal-lery.show > .display {
 .display > img {
   display: inline-block;
   image-orientation: from-image;
-  max-height: 100vh;
+  height: 100vh;
   width:auto;
   line-height: 100vh;
 }
