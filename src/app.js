@@ -218,7 +218,7 @@ google.onAuth = function() {
       } else µ('#main').className = 'select';
     }
 
-    res.json(ret);
+    res.sendFile('public/index.html');
   });
 
   srv.app.post('/fileUpload', (req, res)=> {
