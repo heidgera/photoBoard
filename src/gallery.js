@@ -1,5 +1,7 @@
 'use strict';
 
+require('./vendor/muse/utils.js');
+
 var gallery = inheritFrom(HTMLElement, function() {
   this.createdCallback = function() {
     var _this = this;

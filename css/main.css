@@ -43,6 +43,7 @@ gal-lery.show > .display {
 }
 
 .display > img {
+  image-orientation: from-image;
   height: 100vh;
   width:auto;
 }
@@ -73,6 +74,7 @@ gal-lery.show > .display {
 }
 
 .thumbs > img {
+  image-orientation: from-image;
   box-sizing: border-box;
   border: 2px solid black;
   vertical-align: middle;

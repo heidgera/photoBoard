@@ -37,6 +37,22 @@ function getIPaddress() {
 
 µ('#ip').textContent = getIPaddress();
 
+function walkPart(part, type) {
+  var ret = null;
+  if (part.length) {
+    /*parts.forEach(function(item, ind, arr) {
+      if (ret = walkPart(item, type)) break;
+    });*/
+    for (var i = 0; i < part.length; i++) {
+      if (ret = walkPart(part[i], type)) break;
+    }
+  } else if (part.mimeType && part.mimeType == type) {
+    ret = part;
+  }
+
+  return ret;
+}
+
 google.onAuth = function() {
   setInterval(function() {
     gmail.listMessages(['UNREAD'], 'subject:#shoppics has:attachment', function(response) {
@@ -59,38 +75,74 @@ google.onAuth = function() {
             if (resp.payload.parts) {
               var parts = resp.payload.parts;
               var desc = '';
+              var attachBody = '';
+              console.log(parts);
               parts.forEach(function(part, ind, arr) {
-                if (ind == 0) {
-                  console.log(part);
-                  desc = (new Buffer(part.parts[0].body.data, 'base64')).toString();
+                if (walkPart(part, 'text/plain') && !desc.length) {
+                  desc = (new Buffer(walkPart(part, 'text/plain').body.data, 'base64')).toString();
                   desc = desc.replace(/(\r\n|\n|\r)/gm, ' ');
-                  console.log(desc);
-                } else if (part.mimeType && part.mimeType == 'image/jpeg') {
-                  gmail.getAttachment(msgId, part.body.attachmentId, function(resp) {
-                    var data = new Buffer(resp.data, 'base64');
-                    var file = 'assets/photos/' + part.filename;
-                    sharp(data).resize(1920, 1080).max().toFile(file).then(function() {
-                      sheets.getData(ssID, 'Sheet1!A2:E', function(resp) {
-                        //console.log(resp.values);
-                        var rows = resp.values;
-                        rows.unshift(new Array());
-                        rows[0][0] = file;
-                        rows[0][1] = desc;
-                        rows[0][2] = from;
-                        sheets.putData(ssID, 'Sheet1!A2:E', rows, function() {
-                          gmail.editLabels(msgId, [], ['UNREAD']);
-                          µ('#main').clear();
-                          µ('#main').addFromArray(rows);
+                } else if (walkPart(part, 'image/jpeg')) {
+                  attachPart = walkPart(part, 'image/jpeg');
+                }
+              });
 
-                          processing = false;
+              if (attachPart) {
+                console.log(desc);
+                gmail.getAttachment(msgId, attachPart.body.attachmentId, function(resp) {
+                  var data = new Buffer(resp.data, 'base64');
+                  var file = 'assets/photos/' + attachPart.filename;
+                  sharp(data).resize(1920, 1080).max().rotate().toFile(file).then(function() {
+                    sheets.getData(ssID, 'Sheet1!A2:E', function(resp) {
+                      //console.log(resp.values);
+                      var rows = resp.values;
+                      rows.unshift(new Array());
+                      rows[0][0] = file;
+                      rows[0][1] = desc;
+                      rows[0][2] = from;
+                      sheets.putData(ssID, 'Sheet1!A2:E', rows, function() {
+                        gmail.editLabels(msgId, [], ['UNREAD']);
+                        µ('#main').clear();
+                        µ('#main').addFromArray(rows);
 
-                          //µ('#main').src = file;
-                        });
+                        processing = false;
+
+                        //µ('#main').src = file;
                       });
                     });
                   });
-                }
-              });
+                });
+              }
+              /*if (ind == 0) {
+
+                desc = (new Buffer(part.parts[0].body.data, 'base64')).toString();
+                desc = desc.replace(/(\r\n|\n|\r)/gm, ' ');
+                console.log(desc);
+              } else if (part.mimeType && part.mimeType == 'image/jpeg') {
+                gmail.getAttachment(msgId, part.body.attachmentId, function(resp) {
+                  var data = new Buffer(resp.data, 'base64');
+                  var file = 'assets/photos/' + part.filename;
+                  sharp(data).resize(1920, 1080).max().toFile(file).then(function() {
+                    sheets.getData(ssID, 'Sheet1!A2:E', function(resp) {
+                      //console.log(resp.values);
+                      var rows = resp.values;
+                      rows.unshift(new Array());
+                      rows[0][0] = file;
+                      rows[0][1] = desc;
+                      rows[0][2] = from;
+                      sheets.putData(ssID, 'Sheet1!A2:E', rows, function() {
+                        gmail.editLabels(msgId, [], ['UNREAD']);
+                        µ('#main').clear();
+                        µ('#main').addFromArray(rows);
+
+                        processing = false;
+
+                        //µ('#main').src = file;
+                      });
+                    });
+                  });
+                });
+              }*/
+
             }
           });
         });
