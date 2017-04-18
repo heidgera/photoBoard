@@ -5,6 +5,8 @@ var fs = require('fs');
 
 var srv = require('./src/exp_server.js');
 
+var exec = require('child_process').exec;
+
 const remote = require('electron').remote;
 
 var google = require('./src/google.js');
@@ -138,38 +140,18 @@ google.onAuth = function() {
                   }
                 });
               }
-              /*if (ind == 0) {
-
-                desc = (new Buffer(part.parts[0].body.data, 'base64')).toString();
-                desc = desc.replace(/(\r\n|\n|\r)/gm, ' ');
-                console.log(desc);
-              } else if (part.mimeType && part.mimeType == 'image/jpeg') {
-                gmail.getAttachment(msgId, part.body.attachmentId, function(resp) {
-                  var data = new Buffer(resp.data, 'base64');
-                  var file = 'assets/photos/' + part.filename;
-                  sharp(data).resize(1920, 1080).max().toFile(file).then(function() {
-                    sheets.getData(ssID, 'Sheet1!A2:E', function(resp) {
-                      //console.log(resp.values);
-                      var rows = resp.values;
-                      rows.unshift(new Array());
-                      rows[0][0] = file;
-                      rows[0][1] = desc;
-                      rows[0][2] = from;
-                      sheets.putData(ssID, 'Sheet1!A2:E', rows, function() {
-                        gmail.editLabels(msgId, [], ['UNREAD']);
-                        µ('#main').clear();
-                        µ('#main').addFromArray(rows);
-
-                        processing = false;
-
-                        //µ('#main').src = file;
-                      });
-                    });
-                  });
-                });
-              }*/
 
             }
+          });
+        });
+      }
+    }, ()=> {
+
+      if (!processing) {
+        processing = true;
+        exec('sudo ifdown wlan0', (err, out, sterr)=> {
+          if (!err) exec('sudo ifup wlan0', (err, out, sterr)=> {
+            if (!err) setTimeout(()=> {processing = false;}, 2000);
           });
         });
       }
@@ -257,42 +239,9 @@ google.onAuth = function() {
 
     });*/
 
-    res.json(ret);
+    res.sendFile('public/index.html');
   });
 
   µ('#main').displayNext();
 
-  /*photoRoute.post('/pictures.json', function(req, res) {
-    var obj = req.body;
-    var ret = {};
-    ret.photos = [];
-
-    let params = {
-      queryString: "'0B1F7mIkYmh6nVEdVVUZ6OUpWTmc' in parents",
-      orderBy: 'name desc',
-    };
-
-    if (obj.pageToken && obj.pageToken.length) params.pageToken = obj.pageToken;
-
-    //babyTime.sendTimeSinceLast(res);
-    drive.listFiles(params, function(resp) {
-      var files = resp.files;
-      ret.pageToken = resp.nextPageToken;
-      if (files.length == 0) {
-        console.log('No files found.');
-      } else {
-        for (var i = 0; i < files.length; i++) {
-          if (files[i].fileExtension == 'jpg') {
-            var desc = files[i].description;
-            if (desc) desc = desc.replace(/(\r\n|\n|\r)/gm, ' ');
-            ret.photos.push({ description: desc, thumb:files[i].thumbnailLink, link: 'https://drive.google.com/uc?export=view&id=' + files[i].id });
-
-            //console.log('Link: https://drive.google.com/uc?export=view&id=' + file.id);
-          }
-        }
-      }
-
-      res.json(ret);
-    });
-  });*/
 };

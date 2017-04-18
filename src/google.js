@@ -222,7 +222,7 @@ function init(auth) {
 
   //gmail exports
 
-  exports.gmail.listMessages = function(labels, queryString, cb) {
+  exports.gmail.listMessages = function(labels, queryString, cb, errCB) {
     gmail.users.messages.list({
       userId: 'me',
       labelIds: labels,
@@ -230,6 +230,7 @@ function init(auth) {
     }, function(err, response) {
       if (err) {
         console.log('The API returned an error: ' + err);
+        if (errCB) errCB();
         return;
       }
 
