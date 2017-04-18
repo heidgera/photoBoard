@@ -153,7 +153,7 @@ google.onAuth = function() {
         processing = true;
         exec('sudo ifdown wlan0', (err, out, sterr)=> {
           if (!err) exec('sudo ifup wlan0', (err, out, sterr)=> {
-            if (!err) setTimeout(()=> {processing = false;}, 2000);
+            if (!err) setTimeout(()=> {processing = false;}, 15000);
           });
         });
       }
