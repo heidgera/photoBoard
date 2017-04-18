@@ -6,7 +6,7 @@ var url = require('url');
 //var WebSocketServer = require('ws').Server;
 //var wss = new WebSocketServer({ server: server });
 var express = require('express');
-var port = 8080;
+var port = 80;
 
 var bodyParser = require('body-parser');
 var busboy = require('connect-busboy');
