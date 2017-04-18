@@ -7,6 +7,8 @@ var srv = require('./src/exp_server.js');
 
 var exec = require('child_process').exec;
 
+var path = require('path');
+
 const remote = require('electron').remote;
 
 var google = require('./src/google.js');
@@ -200,13 +202,20 @@ google.onAuth = function() {
       } else µ('#main').className = 'select';
     }
 
-    res.sendFile(__dirname + '/../public/index.html');
+    res.sendFile(path.resolve(__dirname + '/public/index.html'));
   });
 
   srv.app.post('/fileUpload', (req, res)=> {
     var ret = { rep:true };
 
+    var desc = '';
+
     req.pipe(req.busboy);
+    req.busboy.on('field', function(fieldname, val) {
+      //console.log('Field [' + fieldname + ']: value: ' + inspect(val));
+      if (fieldname = 'descText') desc = val;
+    });
+
     req.busboy.on('file', function(fieldname, file, filename) {
 
       fstream = fs.createWriteStream('assets/photos/' + filename);
@@ -216,7 +225,7 @@ google.onAuth = function() {
           var rows = resp.values;
           rows.unshift(new Array());
           rows[0][0] = 'assets/photos/' + filename;
-          rows[0][1] = '';
+          rows[0][1] = desc;
           rows[0][2] = 'Uploaded';
           sheets.putData(ssID, 'Sheet1!A2:E', rows, function() {
             µ('#main').clear();
@@ -239,7 +248,7 @@ google.onAuth = function() {
 
     });*/
 
-    res.sendFile(__dirname + '/../public/index.html');
+    res.sendFile(path.resolve(__dirname + '/public/index.html'));
   });
 
   µ('#main').displayNext();
