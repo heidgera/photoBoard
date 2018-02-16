@@ -1,14 +1,28 @@
-<!doctype html>
-<html lang="en">
-<meta charset="utf-8"></meta>
+<html>
   <head>
-    <title>Template</title>
+    <link rel="stylesheet" href="css/main.css"></link>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <script src="common/src/muse/main.js" main="src/app.js"></script>
-  	<link rel="stylesheet" href="css/style.css"></link>
   </head>
   <body>
-    <div id='outer'>
-      <div id='track'></div>
+    <div class='topBanner'>
+      <h1>PhotoController 1.0</h1>
+      <br />
+      <div id='respText'></div>
+    </div>
+    <div class='buttonZone'>
+      <div class='buttons' id='prev'>Prev</div>
+      <div class='buttons' id='next'>Next</div>
+      <br />
+      <div class='buttons' id='menu'>Menu</div>
+      <br />
+      <form action='/fileUpload' enctype="multipart/form-data" method="post">
+        <div class='buttons' id='choose'><input type='file' name='imageUpload'></div>
+        <br />
+        <div class='buttons' id='choose'><input type='text' name='descText' placeholder='Comments'></div>
+        <br />
+        <div class='buttons' id='upload'><input type="submit" value="Upload"></div>
+      </form>
     </div>
   </body>
 </html>
