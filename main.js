@@ -11,8 +11,6 @@ const BrowserWindow = electron.BrowserWindow;
 const path = require('path');
 const url = require('url');
 
-global.appRoot = path.resolve(__dirname);
-
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
@@ -25,11 +23,10 @@ function createWindow() {
     //fullscreen:true,
     width: size.width,
     height: size.height,
-    frame: false,
 
     //kiosk: true,
     scrollBounce: false,
-    title: 'TemplateProject',
+    title: 'PhotoBoard',
   });
 
   mainWindow.maximize();

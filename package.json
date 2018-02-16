@@ -1,7 +1,7 @@
 {
-  "name": "TemplateProject",
-  "version": "1.1.0",
-  "description": "Simple template for electron apps",
+  "name": "PhotoBoard",
+  "version": "1.0.0",
+  "description": "A minimal photo board",
   "main": "main.js",
   "scripts": {
     "start": "electron main.js"
