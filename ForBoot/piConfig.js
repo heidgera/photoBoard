@@ -16,5 +16,10 @@ exports.config = {
       ssid: 'SensorServer',
       password: 'defaultPass',
     },*/
+    wifiUser: {
+      ssid: 'SMM',
+      username: 'aheidgerken',
+      password: 'PASSWORD',
+    },
   },
 };
