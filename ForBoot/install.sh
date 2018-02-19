@@ -35,8 +35,4 @@ echo -e "\nConfiguring"
 
 cd piFig
 
-mkdir node_modules
-
-
-
 sudo node install.js
