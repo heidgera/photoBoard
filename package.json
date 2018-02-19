@@ -20,7 +20,6 @@
     "express-fileupload": "^0.4.0",
     "google-auth-library": "^1.2.1",
     "googleapis": "^25.0.0",
-    "iohook": "^0.1.13",
     "nodemailer": "^4.4.2",
     "path": "^0.12.7",
     "serialport": "^5.0.0",
