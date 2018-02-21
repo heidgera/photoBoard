@@ -4,7 +4,7 @@ var remote = require('electron').remote;
 
 var process = remote.process;
 
-//remote.getCurrentWindow().closeDevTools();
+remote.getCurrentWindow().closeDevTools();
 
 window.appDataDir = '/Users/aheidgerken';
 
