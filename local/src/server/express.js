@@ -12,8 +12,8 @@ obtain(obtains, (express, bodyParser, fs, fileUpload)=> {
   router.use(bodyParser.json());
   router.use(fileUpload());
 
-  fileServer.use('', express.static('./client'));
-  fileServer.use('/common', express.static('./common'));
+  fileServer.use('', express.static(`${__dirname}/../../../client`));
+  fileServer.use('/common', express.static(`${__dirname}/../../../common`));
 
   fileServer.start = ()=> {
     fileServer.use(router);
