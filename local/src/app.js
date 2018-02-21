@@ -231,10 +231,8 @@ obtain(obtains, ({ sheets, drive, gmail, auth }, { getIpAddress }, { fileServer:
     };
 
     document.onkeyup = (e)=> {
-      if (e.which == 27) {
-        var electron = require('electron');
-        process.kill(process.pid, 'SIGINT');
-      } else if (e.which == 73 && e.getModifierState('Control') &&  e.getModifierState('Shift')) {
+
+      if (e.which == 73 && e.getModifierState('Control') &&  e.getModifierState('Shift')) {
         remote.getCurrentWindow().toggleDevTools();
       }
     };
