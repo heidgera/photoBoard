@@ -101,6 +101,7 @@ obtain(['µ/utilities.js'], ()=> {
 
           _this.displayNext = (pause)=> {
             handleTimer(pause);
+            if (player) _this.hideVideo();
             if (_this.thumbs.children.length) {
               if (_this.selected.nextElementSibling) {
                 _this.switch(_this.selected.nextElementSibling);
@@ -113,6 +114,7 @@ obtain(['µ/utilities.js'], ()=> {
 
           _this.displayPrevious = (pause)=> {
             handleTimer(pause);
+            if (player) _this.hideVideo();
             if (_this.thumbs.children.length) {
               if (_this.selected.previousElementSibling) {
                 _this.switch(_this.selected.previousElementSibling);

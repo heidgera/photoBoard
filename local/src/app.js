@@ -196,6 +196,14 @@ obtain(obtains, ({ sheets, drive, gmail, auth }, { getIpAddress }, { fileServer:
       res.json(ret);
     });
 
+    router.post('/youtube', (req, res)=> {
+      var ret = { rep: true };
+
+      µ('#main').showVideo(req.body.vidId);
+
+      res.json(ret);
+    });
+
     router.post('/fileUpload', (req, res)=> {
       var ret = { rep: true };
 
