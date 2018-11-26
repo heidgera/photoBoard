@@ -55,7 +55,7 @@ gal-lery.show > .display {
   line-height: 100vh;
 }
 
-.display > iframe {
+#videoPlayer {
   display: none;
   z-index: 100;
   height: 100vh;
@@ -68,7 +68,7 @@ gal-lery.show > .display {
   margin: auto;
 }
 
-.display > iframe.playing {
+#videoPlayer {
   display: inline-block;
 }
 

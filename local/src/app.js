@@ -176,8 +176,7 @@ obtain(obtains, ({ sheets, drive, gmail, auth }, { getIpAddress }, { fileServer:
       }
     };
 
-    µ('#main').video.src = 'https://www.youtube.com/embed/Y0yOTanzx-s';
-    µ('#main').video.className = 'playing';
+    //µ('#main').showVideo('Y0yOTanzx-s');
 
     router.post('/control', (req, res)=> {
       var ret = { rep: true };
@@ -186,9 +185,7 @@ obtain(obtains, ({ sheets, drive, gmail, auth }, { getIpAddress }, { fileServer:
       if (obj.next) µ('#main').displayNext(true);
       else if (obj.prev) µ('#main').displayPrevious(true);
       else if (obj.youtube) {
-        µ('#main').pause();
-        µ('#main').video.src = obj.youtube;
-        µ('#main').video.className = 'playing';
+        µ('#main').showVideo(obj.youtube);
       } else if (obj.menu) {
         if (µ('#main').className == 'select') {
           µ('#main').className = 'show';

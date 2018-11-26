@@ -23,7 +23,14 @@ obtain(['µ/utilities.js'], ()=> {
           _this.display = µ('+div', _this);
           _this.display.className = 'display';
 
-          _this.video = µ('+iframe', _this.display);
+          var tempVideo = µ('+div', _this.display);
+          tempVideo.id = 'galleryVideo';
+
+          window.onYouTubeIframeAPIReady = function () {
+            console.log('now');
+
+            //_this.showVideo('Y0yOTanzx-s');
+          };
 
           _this.frame = µ('+img', _this.display);
           _this.frame.onclick = (e)=> {
@@ -113,6 +120,33 @@ obtain(['µ/utilities.js'], ()=> {
                 _this.switch(_this.thumbs.lastElementChild);
               }
             }
+          };
+
+          _this.showVideo = (code)=> {
+            µ('#galleryVideo').className = 'playing';
+            if (!_this.player) {
+              _this.player = new YT.Player('galleryVideo', {
+                height: '' + window.innerHeight,
+                width: '' + window.innerWidth,
+                videoId: code,
+                events: {
+                  onReady: (event)=> {
+                    event.target.playVideo();
+                  },
+
+                  onStateChange: ()=> {},
+                },
+              });
+            } else {
+              _this.player.cueVideoById({ videoId: code });
+              _this.player.playVideo();
+            }
+          };
+
+          _this.hideVideo = ()=> {
+            µ('#galleryVideo').className = '';
+            _this.player = null;
+            µ('#galleryVideo').src = null;
           };
 
           _this.clear = ()=> {
