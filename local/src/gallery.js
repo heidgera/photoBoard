@@ -23,6 +23,8 @@ obtain(['µ/utilities.js'], ()=> {
           _this.display = µ('+div', _this);
           _this.display.className = 'display';
 
+          _this.video = µ('+iframe', _this.display);
+
           _this.frame = µ('+img', _this.display);
           _this.frame.onclick = (e)=> {
             // temporary
@@ -79,6 +81,15 @@ obtain(['µ/utilities.js'], ()=> {
               _this.advanceTimer = setTimeout(_this.displayNext, 7000);
               _this.className = 'show';
             }
+          };
+
+          _this.pause = ()=> {
+            clearTimeout(_this.advanceTimer);
+          };
+
+          _this.resume = ()=> {
+            clearTimeout(_this.advanceTimer);
+            _this.advanceTimer = setTimeout(_this.displayNext, 7000);
           };
 
           _this.displayNext = (pause)=> {

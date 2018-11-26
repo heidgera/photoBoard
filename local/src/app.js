@@ -4,13 +4,11 @@ var remote = require('electron').remote;
 
 var process = remote.process;
 
-remote.getCurrentWindow().closeDevTools();
-
 window.appDataDir = '/Users/aheidgerken';
 
 var obtains = [
   'µ/google/',
-  '../piFig/src/utils.js',
+  '../../piFig/src/utils.js',
   './src/server/express.js',
   'path',
   './src/gallery.js',
@@ -178,13 +176,20 @@ obtain(obtains, ({ sheets, drive, gmail, auth }, { getIpAddress }, { fileServer:
       }
     };
 
+    µ('#main').video.src = 'https://www.youtube.com/embed/Y0yOTanzx-s';
+    µ('#main').video.className = 'playing';
+
     router.post('/control', (req, res)=> {
       var ret = { rep: true };
 
       var obj = req.body;
       if (obj.next) µ('#main').displayNext(true);
       else if (obj.prev) µ('#main').displayPrevious(true);
-      else if (obj.menu) {
+      else if (obj.youtube) {
+        µ('#main').pause();
+        µ('#main').video.src = obj.youtube;
+        µ('#main').video.className = 'playing';
+      } else if (obj.menu) {
         if (µ('#main').className == 'select') {
           µ('#main').className = 'show';
         } else µ('#main').className = 'select';

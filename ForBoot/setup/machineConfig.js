@@ -5,14 +5,10 @@ exports.config = {
       password: 'template!',
       domainName: 'template.net',
     },*/
-    appRepo: 'https://github.com/heidgera/waterWallClientPXE',
+    appRepo: 'https://github.com/heidgera/photoBoard',
     autostart: true,
     gitWatch: true,
-    softShutdown: {
-      monitorPin: 24,
-      controlPin: 23,
-      delayTime: 1000,
-    },
+    preventSleep: true,
     /*wifi: {
       ssid: 'SensorServer',
       password: 'defaultPass',

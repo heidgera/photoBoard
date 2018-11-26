@@ -55,6 +55,23 @@ gal-lery.show > .display {
   line-height: 100vh;
 }
 
+.display > iframe {
+  display: none;
+  z-index: 100;
+  height: 100vh;
+  width:auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.display > iframe.playing {
+  display: inline-block;
+}
+
 .display > .desc {
   display: none;
   position: fixed;

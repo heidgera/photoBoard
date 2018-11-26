@@ -15,14 +15,12 @@
   "homepage": "http://re.trof.it",
   "dependencies": {
     "body-parser": "^1.18.2",
-    "electron": "1.7.5",
     "express": "^4.15.4",
     "express-fileupload": "^0.4.0",
     "google-auth-library": "^1.2.1",
     "googleapis": "^25.0.0",
     "nodemailer": "^4.4.2",
     "path": "^0.12.7",
-    "serialport": "^5.0.0",
     "sharp": "^0.19.0",
     "ws": "^3.1.0"
   }
