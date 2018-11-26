@@ -5,21 +5,17 @@ exports.config = {
       password: 'template!',
       domainName: 'template.net',
     },*/
+    appRepo: 'https://github.com/heidgera/waterWallClientPXE',
     autostart: true,
     gitWatch: true,
-    /*softShutdown: {
+    softShutdown: {
       monitorPin: 24,
-      controlPin: 25,
+      controlPin: 23,
       delayTime: 1000,
     },
-    wifi: {
+    /*wifi: {
       ssid: 'SensorServer',
       password: 'defaultPass',
     },*/
-    wifiUser: {
-      ssid: 'SMM',
-      username: 'aheidgerken',
-      password: 'PASSWORD',
-    },
   },
 };
